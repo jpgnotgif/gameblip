@@ -1,0 +1,11 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: gameblip_development
+  username: dev
+
+test:
+  adapter: mysql
+  encoding: utf8
+  database: gameblip_test
+  username: dev
