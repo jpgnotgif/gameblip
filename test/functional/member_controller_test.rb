@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class MemberControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  def setup
+
   end
 end

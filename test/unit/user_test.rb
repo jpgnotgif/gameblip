@@ -1,49 +1,53 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead.
-  # Then, you can remove it from this and the functional test.
-  include AuthenticatedTestHelper
-  fixtures :users
+  def setup
+    @user = Factory.build(:user)
+  end
 
   def test_should_create_user
     assert_difference 'User.count' do
-      user = create_user
-      assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
+      assert @user.save, "Errors :: #{@user.errors.full_messages.to_sentence}"
     end
   end
 
   def test_should_initialize_activation_code_upon_creation
-    user = create_user
-    user.reload
-    assert_not_nil user.activation_code
+    assert_difference "User.count" do
+      assert @user.save
+      @user.reload
+      assert_not_nil @user.activation_code
+    end
   end
 
   def test_should_require_login
     assert_no_difference 'User.count' do
-      u = create_user(:login => nil)
-      assert u.errors.on(:login)
+      @user.login = nil
+      assert_equal false, @user.save
+      assert @user.errors.on(:login)
     end
   end
 
   def test_should_require_password
     assert_no_difference 'User.count' do
-      u = create_user(:password => nil)
-      assert u.errors.on(:password)
+      @user.password = nil
+      assert_equal false, @user.save
+      assert @user.errors.on(:password)
     end
   end
 
   def test_should_require_password_confirmation
     assert_no_difference 'User.count' do
-      u = create_user(:password_confirmation => nil)
-      assert u.errors.on(:password_confirmation)
+      @user.password_confirmation = nil
+      assert_equal false, @user.save
+      assert @user.errors.on(:password_confirmation)
     end
   end
 
   def test_should_require_email
     assert_no_difference 'User.count' do
-      u = create_user(:email => nil)
-      assert u.errors.on(:email)
+      @user.email = nil
+      assert_equal false, @user.save
+      assert @user.errors.on(:email)
     end
   end
 
@@ -100,10 +104,4 @@ class UserTest < ActiveSupport::TestCase
     assert users(:quentin).remember_token_expires_at.between?(before, after)
   end
 
-protected
-  def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
-    record.save
-    record
-  end
 end
