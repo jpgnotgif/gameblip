@@ -8,3 +8,7 @@ Factory.define(:user) do |f|
   f.password "captain_america"
   f.password_confirmation "captain_america"
 end
+
+Factory.define(:xbox_console_user) do |f|    
+  data = Hash.from_xml(File.open(File.join(RAILS_ROOT, "test/files/xml/xbox.xml"), "r") { |file| f.read })
+end
