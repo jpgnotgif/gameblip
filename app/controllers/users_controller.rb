@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
+  before_filter :load_user
 
-  # render new.rhtml
   def new
     @user = User.new
   end
@@ -36,4 +34,18 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
     end
   end
+
+  def show
+    if @user
+      render :template => "users/details"
+      return true
+    end
+    @total_users = User.count
+  end
+
+  protected
+  def load_user
+    @user = User.find_by_id(params[:id])
+  end
+
 end

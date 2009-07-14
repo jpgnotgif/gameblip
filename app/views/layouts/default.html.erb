@@ -9,11 +9,8 @@
 </head>
 <body>
 
-<% if logged_in? -%>
-  <h1>Welcome <%= current_user.login %> </h1>
-<% end %>
-
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:error] %></p>
 
 <%= yield  %>
 

@@ -3,8 +3,9 @@ require 'users_controller'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    @user   = users(:wolverine)
-    @emails = ActionMailer::Base.deliveries
+    @new_user = Factory.build(:user)
+    @user     = users(:wolverine)
+    @emails   = ActionMailer::Base.deliveries
     @emails.clear
   end
 
@@ -75,9 +76,33 @@ class UsersControllerTest < ActionController::TestCase
     # well played, sir
   end
 
+  def test_show_with_id
+    params = {
+      :id => @user.id
+    }
+    get :show, params
+    assert_not_nil assigns(:user)
+    assert_nil assigns(:total_users)
+    assert_template :details
+  end
+
+  def test_show_with_no_id
+    get :show
+    assert_nil assigns(:user)
+    assert_not_nil assigns(:total_users)
+    assert_template :show
+  end
+
   protected
     def create_user(options = {})
-      post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-        :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
+      params = {
+        :user => {
+          :login => @new_user.login,
+          :email => @new_user.email,
+          :password => @new_user.password,
+          :password_confirmation => @new_user.password_confirmation
+        }.merge(options)
+      }
+      post :create, params      
     end
 end

@@ -9,12 +9,14 @@ class SessionsControllerTest < ActionController::TestCase
   def test_should_login_and_redirect
     post :create, :login => 'spiderman', :password => 'monkey'
     assert session[:user_id]
-    assert_redirected_to :controller => :member
+    assert_equal "Logged in successfully", flash[:notice]
+    assert_redirected_to :controller => :users, :action => :show, :id => session[:user_id]
   end
 
   def test_should_fail_login_and_not_redirect
     post :create, :login => 'spiderman', :password => 'bad password'
     assert_nil session[:user_id]
+    assert_equal "Invalid username or password", flash.now[:error]
     assert_template :new
   end
 
