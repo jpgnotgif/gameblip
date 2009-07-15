@@ -1,8 +1,9 @@
 class CreateXboxConsoleUsers < ActiveRecord::Migration
   def self.up
     create_table :xbox_console_users do |t|
+      t.references :user
       t.string :account_status
-      t.string :status_description
+      t.string :status
       t.string :gamertag
       t.integer :gamerscore
       t.string :motto
@@ -11,6 +12,7 @@ class CreateXboxConsoleUsers < ActiveRecord::Migration
       t.string :country
       t.string :reputation_url
       t.string :zone
+      t.string :recent_activity
       t.datetime :last_seen_at
       t.boolean :online
       t.timestamps
