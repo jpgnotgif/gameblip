@@ -8,8 +8,14 @@ class XboxConsoleUserTest < ActiveSupport::TestCase
 
   def test_should_save
     assert_difference "XboxConsoleUser.count" do
-      Net::HTTP.expects(:get).with(AppConfig.xbox_api.url + "#{@xbox_console_user.gamertag}").returns(@xml)
+      Net::HTTP.expects(:get).with(URI.parse(AppConfig.xbox_api.url + "#{@xbox_console_user.gamertag}")).returns(@xml)
       assert @xbox_console_user.save, "Errors :: #{@xbox_console_user.errors.full_messages.to_sentence.inspect}"
+      assert_not_nil @xbox_console_user.account_status
+      assert_not_nil @xbox_console_user.status
+      assert_not_nil @xbox_console_user.gamerscore
+      assert_not_nil @xbox_console_user.avatar_url
+      assert_not_nil @xbox_console_user.zone
+      assert_not_nil @xbox_console_user.last_seen_at
     end
   end
 
