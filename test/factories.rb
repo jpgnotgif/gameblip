@@ -11,7 +11,6 @@ end
 
 Factory.define(:xbox_console_user) do |f|    
   data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "test/files/xml/xbox.xml"), "r") { |file| file.read }))
-  f.user { |a| a.association(:user) }
   f.account_status data[:xbox_info][:account_status]
   f.status data[:xbox_info][:presence_info][:status_text]
   f.gamertag data[:xbox_info][:gamertag]

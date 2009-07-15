@@ -1,0 +1,2 @@
+xbox_api:
+  url: "http://duncanmackenzie.net/services/GetXboxInfo.aspx?GamerTag=" 
