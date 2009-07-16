@@ -1,0 +1,12 @@
+<h1>Editing xbox_console_user</h1>
+
+<% form_for(@xbox_console_user) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @xbox_console_user %> |
+<%= link_to 'Back', xbox_console_users_path %>

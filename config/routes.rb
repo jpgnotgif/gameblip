@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
   map.resources :users
+  map.resources :xbox_console_users
 
   map.resource :session
 
