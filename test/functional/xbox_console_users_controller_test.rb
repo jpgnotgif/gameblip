@@ -1,9 +1,10 @@
-require File.dirname(i__FILE__) + '/../test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class XboxConsoleUsersControllerTest < ActionController::TestCase
   def setup
-    @user               = Factory(:user)
-    @xbox_console_user  = Factory.build(:xbox_console_user)
+    @wolverine_user     = users(:wolverine)
+    @xbox_console_user  = Factory.build(:xbox_console_user, {:user => @wolverine_user})
+    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml", "xbox.xml"), "r") { |f| f.read }
   end
 
   def test_should_get_index
@@ -13,26 +14,29 @@ class XboxConsoleUsersControllerTest < ActionController::TestCase
   end
 
   def test_should_get_new
-    login_as @user
-    get :new, params
+    login_as @wolverine_user
+    get :new
     assert_template :new
   end
 
   def test_new_without_authentication
     get :new
-    assert_equal "You must be logged in to add a new Xbox360 account.", flash[:notice]
-    assert_redirected_to :controller => :users, :action => :index
+    assert_equal "You must be logged in to perform that action", flash[:notice]
+    assert_redirected_to new_session_path 
   end
 
-  def test_should_create_xbox_console_user do
-    login_as @user
-    assert_difference ["@user.xbox_console_users", "XboxConsoleUser.count"] do
-      params = {
-        :xbox_console_user => {
-          :gamertag => @xbox_console_user.gamertag
-        }
+  def test_should_create_xbox_console_user
+    login_as @wolverine_user
+    params = {
+      :xbox_console_user => {
+        :gamertag => @xbox_console_user.gamertag
       }
+    }
+    assert_difference ["@wolverine_user.xbox_console_users.count", "XboxConsoleUser.count"] do
+      Net::HTTP.expects(:get).with(URI.parse(AppConfig.xbox_api.url + @xbox_console_user.gamertag)).returns(@xml)
       post :create, params
+      assert_not_nil assigns(:xbox_console_user)
+      assert_equal "Xbox360 account was successfully added", flash[:notice]
       assert_redirected_to xbox_console_user_path(assigns(:xbox_console_user))
     end
   end
@@ -42,27 +46,6 @@ class XboxConsoleUsersControllerTest < ActionController::TestCase
       :id => @xbox_console_user.id
     } 
     get :show
-    assert_response :success
-  end
-
-  def test_should_get_edit
-    params = {
-      :id => @user.id
-    }
-    get :edit, :id => xbox_console_users(:one).to_param
-    assert_response :success
-  end
-
-  test "should update xbox_console_user" do
-    put :update, :id => xbox_console_users(:one).to_param, :xbox_console_user => { }
-    assert_redirected_to xbox_console_user_path(assigns(:xbox_console_user))
-  end
-
-  test "should destroy xbox_console_user" do
-    assert_difference('XboxConsoleUser.count', -1) do
-      delete :destroy, :id => xbox_console_users(:one).to_param
-    end
-
-    assert_redirected_to xbox_console_users_path
+    assert_template :show
   end
 end
