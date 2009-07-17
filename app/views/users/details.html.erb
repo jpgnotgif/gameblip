@@ -1,8 +1,15 @@
 <h2><%= current_user == @user ? "My details" : "Viewing details for #{@user.login}" %></h2>
 
+<p><b>Username:</b> <%= @user.login %></p>
 <p><b>Email:</b> <%= @user.email %></p>
 
-
 <h3>Gamertags</h3>
+<small><%= link_to "Add a new Xbox360 gamertag", new_xbox_console_user_path %></small>
+<table>
+  <tr>
+  <% @xbox_console_users.each do |xbox_console_user| %>
+      <td><%= image_tag xbox_console_user.avatar_url %><p><%= xbox_console_user.gamertag %></p></td>
+  <% end %>
+  </tr>
+</table>
 
-<%= link_to "Add a new Xbox360 gamertag", new_xbox_console_user_path %>
