@@ -4,22 +4,28 @@ class XboxConsoleUsersController < ApplicationController
   def index
     @xbox_console_users = XboxConsoleUser.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.xml  { render :xml => @xbox_console_users }
     end
   end
 
   def show
+    @xbox_console_user = XboxConsoleUser.find_by_id(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @xbox_console_user }
+      unless @xbox_console_user
+        format.html { render :action => :index }
+        format.xml  { render :xml => {:errors => ["Xbox360 user id is invalid"]}, :status => :unprocessable_entity }
+      else
+        format.html 
+        format.xml  { render :xml => @xbox_console_user }
+      end
     end
   end
 
   def new
     @xbox_console_user = XboxConsoleUser.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @xbox_console_user }
     end
   end

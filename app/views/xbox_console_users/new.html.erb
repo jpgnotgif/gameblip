@@ -1,10 +1,10 @@
-<h1>New xbox_console_user</h1>
+<h1>New Xbox360 gamertag </h1> 
 
 <% form_for(@xbox_console_user) do |f| %>
   <%= f.error_messages %>
-
+  <p>Gamertag: <%= f.text_field :gamertag %> </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Add' %>
   </p>
 <% end %>
 

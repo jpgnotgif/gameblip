@@ -10,6 +10,6 @@ Factory.define(:user) do |f|
 end
 
 Factory.define(:xbox_console_user) do |f|    
-  data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "test/files/xml/xbox.xml"), "r") { |file| file.read }))
+  data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live/foo.xml"), "r") { |file| file.read }))
   f.gamertag data[:xbox_info][:gamertag]
 end

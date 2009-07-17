@@ -3,16 +3,17 @@ require 'users_controller'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    @new_user = Factory.build(:user)
-    @user     = users(:wolverine)
-    @emails   = ActionMailer::Base.deliveries
+    @new_user       = Factory.build(:user)
+    @user           = users(:josephpgutierrez)
+    @inactive_user  = users(:jennifer)
+    @emails         = ActionMailer::Base.deliveries
     @emails.clear
   end
 
   def test_should_allow_signup
     assert_difference ['User.count', '@emails.count'] do
       create_user
-      assert_redirected_to "/login"
+      assert_redirected_to login_path 
     end
   end
 
@@ -55,11 +56,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_should_activate_user
-    assert_nil User.authenticate('wolverine', 'test')
-    get :activate, :activation_code => @user.activation_code
-    assert_redirected_to "/login"
+    assert_nil User.authenticate("jennifer", "test")
+    get :activate, :activation_code => @inactive_user.activation_code
+    assert_redirected_to login_path 
     assert_not_nil flash[:notice]
-    assert_equal @user, User.authenticate('wolverine', 'monkey')
+    assert_equal @inactive_user, User.authenticate("jennifer", "jennifer")
   end
   
   def test_should_not_activate_user_without_key
@@ -82,6 +83,7 @@ class UsersControllerTest < ActionController::TestCase
     }
     get :show, params
     assert_not_nil assigns(:user)
+    assert_not_nil assigns(:xbox_console_users)
     assert_nil assigns(:total_users)
     assert_template :details
   end

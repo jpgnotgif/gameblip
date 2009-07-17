@@ -1,4 +1,4 @@
-<h1>Listing xbox_console_users</h1>
+<h1>Xbox360 Gamertags</h1>
 
 <table>
   <tr>
@@ -6,13 +6,11 @@
 
 <% @xbox_console_users.each do |xbox_console_user| %>
   <tr>
-    <td><%= link_to 'Show', xbox_console_user %></td>
-    <td><%= link_to 'Edit', edit_xbox_console_user_path(xbox_console_user) %></td>
-    <td><%= link_to 'Destroy', xbox_console_user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to xbox_console_user.gamertag, xbox_console_user %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New xbox_console_user', new_xbox_console_user_path %>
+<%= link_to 'New Xbox360 gamertag', new_xbox_console_user_path %>

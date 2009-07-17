@@ -1,3 +1,8 @@
-<h2> <%= current_user == @user ? "My details" : "Viewing details for #{@user.login}" %> </h2>
+<h2><%= current_user == @user ? "My details" : "Viewing details for #{@user.login}" %></h2>
 
 <p><b>Email:</b> <%= @user.email %></p>
+
+
+<h3>Gamertags</h3>
+
+<%= link_to "Add a new Xbox360 gamertag", new_xbox_console_user_path %>

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class UserTest < ActiveSupport::TestCase
   def setup
     @new_user = Factory.build(:user)
-    @user     = users(:spiderman)
+    @user     = users(:josephpgutierrez)
   end
 
   def test_should_create_user
@@ -54,16 +54,16 @@ class UserTest < ActiveSupport::TestCase
 
   def test_should_reset_password
     @user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    assert_equal @user, User.authenticate('spiderman', 'new password')
+    assert_equal @user, User.authenticate('josephpgutierrez', 'new password')
   end
 
   def test_should_not_rehash_password
-    @user.update_attributes(:login => 'spiderman2')
-    assert_equal @user, User.authenticate('spiderman2', 'monkey')
+    @user.update_attributes(:login => 'jpg')
+    assert_equal @user, User.authenticate('jpg', 'josephpgutierrez')
   end
 
   def test_should_authenticate_user
-    assert_equal @user, User.authenticate('spiderman', 'monkey')
+    assert_equal @user, User.authenticate('josephpgutierrez', 'josephpgutierrez')
   end
 
   def test_should_set_remember_token
