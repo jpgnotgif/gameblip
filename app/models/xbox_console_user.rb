@@ -1,3 +1,10 @@
+# @author:  josephpgutierrez
+# @date:    07.17.2009
+# @note:    This model represents an Xbox live identity, encompassing
+#           attributes such as gamertag, avatar picture, gamerscore, gamerzone,
+#           etc...XboxConsoleUser#valid_identity? performs the API request that
+#           verifies a given gamertag provided by a user.
+
 class XboxConsoleUser < ActiveRecord::Base
   attr_accessor :api_result
   belongs_to :user
