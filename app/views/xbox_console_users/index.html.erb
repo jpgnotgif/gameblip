@@ -6,7 +6,7 @@
 
 <% @xbox_console_users.each do |xbox_console_user| %>
   <tr>
-    <td><%= image_tag(xbox_console_user.avatar_url) %></td>
+    <td><%= image_tag xbox_console_user.avatar_url %></td>
     <td><%= link_to xbox_console_user.gamertag, xbox_console_user %></td>
   </tr>
 <% end %>

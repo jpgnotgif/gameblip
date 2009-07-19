@@ -4,7 +4,7 @@ class XboxConsoleUsersControllerTest < ActionController::TestCase
   def setup
     @user               = users(:josephpgutierrez)
     @xbox_console_user  = Factory.build(:xbox_console_user, {:user => @user})
-    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "foo.xml"), "r") { |f| f.read }
+    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
   end
 
   def test_should_get_index
@@ -43,6 +43,7 @@ class XboxConsoleUsersControllerTest < ActionController::TestCase
 
   def test_should_show_xbox_console_user
     assert_difference ["@user.xbox_console_users.count", "XboxConsoleUser.count"] do
+      Net::HTTP.expects(:get).with(URI.parse(AppConfig.xbox_api.url + @xbox_console_user.gamertag)).returns(@xml)
       assert @xbox_console_user.save
     end
     params = {

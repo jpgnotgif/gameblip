@@ -3,11 +3,13 @@ require 'users_controller'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    @new_user       = Factory.build(:user)
-    @user           = users(:josephpgutierrez)
-    @inactive_user  = users(:jennifer)
-    @emails         = ActionMailer::Base.deliveries
+    @new_user           = Factory.build(:user)
+    @user               = users(:josephpgutierrez)
+    @inactive_user      = users(:jennifer)
+    @emails             = ActionMailer::Base.deliveries
     @emails.clear
+
+#    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
   end
 
   def test_should_allow_signup
@@ -21,7 +23,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       create_user(:login => nil)
       assert assigns(:user).errors.on(:login)
-      assert_response :success
+      assert_equal "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).", flash[:error]
+      assert_template :new
     end
   end
 
@@ -29,7 +32,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       create_user(:password => nil)
       assert assigns(:user).errors.on(:password)
-      assert_response :success
+      assert_equal "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).", flash[:error]
+      assert_template :new
     end
   end
 
@@ -37,7 +41,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       create_user(:password_confirmation => nil)
       assert assigns(:user).errors.on(:password_confirmation)
-      assert_response :success
+      assert_equal "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).", flash[:error]
+      assert_template :new
     end
   end
 
@@ -45,7 +50,8 @@ class UsersControllerTest < ActionController::TestCase
     assert_no_difference 'User.count' do
       create_user(:email => nil)
       assert assigns(:user).errors.on(:email)
-      assert_response :success
+      assert_equal "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).", flash[:error]
+      assert_template :new
     end
   end
   
