@@ -8,8 +8,6 @@ class UsersControllerTest < ActionController::TestCase
     @inactive_user      = users(:jennifer)
     @emails             = ActionMailer::Base.deliveries
     @emails.clear
-
-#    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
   end
 
   def test_should_allow_signup
@@ -99,6 +97,41 @@ class UsersControllerTest < ActionController::TestCase
     assert_nil assigns(:user)
     assert_not_nil assigns(:total_users)
     assert_template :show
+  end
+
+  def test_should_update
+    params = {
+      :id => @user.id,
+      :user => {
+        :email => "new_email@example.com"
+      }
+    }
+    put :update, params
+    assert_equal "Updated user successfully", flash[:notice]
+    assert_redirected_to user_path(@user)
+  end
+
+  def test_update_with_invalid_id
+    params = {
+      :id => nil,
+      :user => {
+        :email => "new_email@example.com"
+      }
+    }
+    put :update, params
+    assert_equal "Invalid user", flash[:error]
+    assert_template :edit, :id => @user.id
+  end
+
+  def test_update_with_invalid_attributes
+    params = {
+      :id => @user.id,
+      :user => {
+        :email => "invalid_email_address"
+      }
+    }
+    put :update, params
+    assert_template :edit, :id => @user.id
   end
 
   protected

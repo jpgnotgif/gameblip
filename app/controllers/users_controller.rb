@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :load_user
+  before_filter :load_user, :only => [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -42,6 +42,20 @@ class UsersController < ApplicationController
       return true
     end
     @total_users = User.count
+  end
+
+  def edit
+  end
+
+  def update
+    if @user && @user.update_attributes(params[:user])
+      #redirect_to user_path(@user.id)
+      redirect_to :action => :show, :id => @user.id
+      flash[:notice] = "Updated user successfully"
+    else
+      flash[:error] = "Invalid user"
+      render :action => :show
+    end
   end
 
   protected
