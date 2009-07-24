@@ -3,6 +3,13 @@
 <p><b>Username:</b> <%= @user.login %></p>
 <p><b>Email:</b> <%= @user.email %></p>
 
+<%= link_to "Edit my details", edit_user_path(@user.id) %> 
+
+<br />
+<br />
+<br />
+<br />
+
 <h3>Gamertags</h3>
 <small><%= link_to "Add a new Xbox360 gamertag", new_xbox_console_user_path %></small>
 <table>

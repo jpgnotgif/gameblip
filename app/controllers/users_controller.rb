@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
+  before_filter :login_required, :only => [:edit, :update]
   before_filter :load_user, :only => [:show, :edit, :update]
+  before_filter :check_user, :only => [:edit, :update]
+
+  def index
+    show
+  end
 
   def new
     @user = User.new
@@ -36,12 +42,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @users = User.all.paginate
     if @user
       @xbox_console_users = @user.xbox_console_users
       render :template => "users/details"
-      return true
+    else
+      render :action => :show
     end
-    @total_users = User.count
   end
 
   def edit
@@ -49,18 +56,24 @@ class UsersController < ApplicationController
 
   def update
     if @user && @user.update_attributes(params[:user])
-      #redirect_to user_path(@user.id)
-      redirect_to :action => :show, :id => @user.id
+      redirect_to user_path(@user.id)
       flash[:notice] = "Updated user successfully"
     else
-      flash[:error] = "Invalid user"
-      render :action => :show
+      render :action => :edit
     end
   end
 
   protected
   def load_user
     @user = User.find_by_id(params[:id])
+  end
+
+  def check_user
+    unless @user && @user == current_user
+      redirect_to users_path
+      flash[:error] = "Invalid user"
+      return false
+    end
   end
 
 end

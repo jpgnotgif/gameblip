@@ -1,0 +1,22 @@
+<%= error_messages_for :user, :header_message => "We could not update your attributes!", :message => "There were problems" %>
+
+<h2>Editing <%= @user.login %> </h2>
+<% form_for @user, :url => user_path(@user.id) do |f| -%>
+<p>
+  <%= label_tag "email" %>: <br />
+  <%= f.text_field :email %>
+</p>
+<p>
+  <%= label_tag "password" %>: <br />
+  <%= f.password_field :password %>
+</p>
+<p>
+  <%= label_tag "password confirmation" %>: <br />
+  <%= f.password_field :password_confirmation %>
+</p>
+<p>
+  <%= submit_tag "Update" %>
+</p>
+<% end -%>
+
+<%= link_to "Back", user_path(@user.id) %>

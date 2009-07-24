@@ -6,6 +6,7 @@ class UsersControllerTest < ActionController::TestCase
     @new_user           = Factory.build(:user)
     @user               = users(:josephpgutierrez)
     @inactive_user      = users(:jennifer)
+    @another_user       = users(:brian)
     @emails             = ActionMailer::Base.deliveries
     @emails.clear
   end
@@ -88,18 +89,51 @@ class UsersControllerTest < ActionController::TestCase
     get :show, params
     assert_not_nil assigns(:user)
     assert_not_nil assigns(:xbox_console_users)
-    assert_nil assigns(:total_users)
     assert_template :details
   end
 
   def test_show_with_no_id
     get :show
     assert_nil assigns(:user)
-    assert_not_nil assigns(:total_users)
+    assert_template :index
+  end
+
+  def test_edit
+    login_as @user
+    params = {
+      :id => @user.id
+    }
+    get :edit, params
+    assert_equal @user, assigns(:user)
+    assert_template :edit
+  end
+
+  def test_edit_without_login
+    params = {
+      :id => @user.id
+    }
+    get :edit, params
+    assert_redirected_to new_session_path
+  end
+
+  def test_edit_with_no_id
+    login_as @user
+    get :edit
     assert_template :show
+    assert_equal "Invalid user", flash[:error]
+  end
+
+  def test_edit_with_invalid_id
+    login_as @user
+    params = {
+      :id => @another_user.id
+    }
+    get :edit, params
+    assert_redirected_to users_path
   end
 
   def test_should_update
+    login_as @user
     params = {
       :id => @user.id,
       :user => {
@@ -112,6 +146,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_update_with_invalid_id
+    login_as @user
     params = {
       :id => nil,
       :user => {
@@ -124,6 +159,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_update_with_invalid_attributes
+    login_as @user
     params = {
       :id => @user.id,
       :user => {
