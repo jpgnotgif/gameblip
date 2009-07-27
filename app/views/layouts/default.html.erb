@@ -5,6 +5,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= controller.controller_name %></title>
+  <%= link_to "Logout", logout_path if logged_in? -%>
   <%= stylesheet_link_tag "scaffold" %>
 </head>
 <body>

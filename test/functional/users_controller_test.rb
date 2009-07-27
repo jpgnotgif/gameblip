@@ -145,7 +145,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to user_path(@user)
   end
 
-  def test_update_with_invalid_id
+  def test_update_without_id
     login_as @user
     params = {
       :id => nil,
@@ -156,6 +156,19 @@ class UsersControllerTest < ActionController::TestCase
     put :update, params
     assert_equal "Invalid user", flash[:error]
     assert_template :edit, :id => @user.id
+  end
+
+  def test_update_with_invalid_id
+    login_as @user
+    params = {
+      :id => @another_user.id,
+      :user => {
+        :email => "new_email@example.com"
+      }
+    }
+    put :update, params
+    assert_equal "Invalid user", flash[:error]
+    assert_redirected_to users_path
   end
 
   def test_update_with_invalid_attributes

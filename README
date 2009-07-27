@@ -1,3 +1,3 @@
 ==== GameBlip ====
 
-This is my first public facing Rails appliction. The purpose of GameBlip is to allow users to update friends and followers regarding their gaming console identity.
+The purpose of GameBlip is to allow users to update friends and followers regarding their gaming console identity. Users can associate any number of Xbox360 gamertags and/or a PSN ids with their GameBlip user account. Using these associated identities, GameBlip users can update the status of these identities (ala Twitter).

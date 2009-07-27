@@ -14,7 +14,7 @@ class XboxConsoleUser < ActiveRecord::Base
 
   after_validation_on_create :build_attributes
 
-  protected
+  private
   def valid_identity?
     valid_account_statuses = ["gold", "silver"]
     begin

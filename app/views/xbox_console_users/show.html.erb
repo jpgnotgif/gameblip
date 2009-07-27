@@ -13,4 +13,4 @@
 <p><b>Country: </b> <%= @xbox_console_user.country %> </p>
 <p><b>Reputation: </b> <%= image_tag @xbox_console_user.reputation_url %> </p>
 
-<%= link_to 'Back', xbox_console_users_path %>
+<%= link_to 'Back', user_path(@xbox_console_user.user.id) %>

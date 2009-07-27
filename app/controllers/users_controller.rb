@@ -75,5 +75,5 @@ class UsersController < ApplicationController
       return false
     end
   end
-
+  
 end
