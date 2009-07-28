@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :load_page_title, :only => [:new, :create]
   before_filter :login_required, :only => [:edit, :update]
   before_filter :load_user, :only => [:show, :edit, :update]
   before_filter :check_user, :only => [:edit, :update]
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
 
   def activate
     logout_keeping_session!
+    @page_title = "Activation"
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
     case
     when (!params[:activation_code].blank?) && user && !user.active?
@@ -42,8 +44,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @page_title = "Viewing all users"
     @users = User.all.paginate
     if @user
+      @page_title = "Viewing #{@user.login}'s details"
       @xbox_console_users = @user.xbox_console_users
       render :template => "users/details"
     else
@@ -74,6 +78,10 @@ class UsersController < ApplicationController
       flash[:error] = "Invalid user"
       return false
     end
+  end
+
+  def load_page_title
+    @page_title = "Register"
   end
   
 end

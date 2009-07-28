@@ -1,5 +1,7 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  before_filter :load_page_title
+  
   def new
   end
 
@@ -35,5 +37,9 @@ protected
   def note_failed_signin
     flash.now[:error] = "Invalid username or password"
     logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
+  end
+
+  def load_page_title
+    @page_title = "Login"
   end
 end

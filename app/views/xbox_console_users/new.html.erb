@@ -1,7 +1,8 @@
 <h1>New Xbox360 gamertag </h1> 
 
+<%= error_messages_for :xbox_console_user, :header_message => "We couldn't add the gamertag", :message => "There were problems" %>
+
 <% form_for(@xbox_console_user) do |f| %>
-  <%= f.error_messages %>
   <p>Gamertag: <%= f.text_field :gamertag %> </p>
   <p>
     <%= f.submit 'Add' %>

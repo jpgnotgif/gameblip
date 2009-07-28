@@ -1,7 +1,9 @@
 class XboxConsoleUsersController < ApplicationController
   before_filter :login_required, :only => [:new, :create]
+  before_filter :load_page_title, :only => [:new, :create]
 
   def index
+    @page_title = "Xbox360 gamertags"
     @xbox_console_users = XboxConsoleUser.all
     respond_to do |format|
       format.html 
@@ -16,7 +18,7 @@ class XboxConsoleUsersController < ApplicationController
         format.html { render :action => :index }
         format.xml  { render :xml => {:errors => ["Xbox360 user id is invalid"]}, :status => :unprocessable_entity }
       else
-        format.html 
+        format.html { @page_title = "Viewing details for #{@xbox_console_user.gamertag}" } 
         format.xml  { render :xml => @xbox_console_user }
       end
     end
@@ -42,5 +44,10 @@ class XboxConsoleUsersController < ApplicationController
         format.xml  { render :xml => @xbox_console_user.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  protected
+  def load_page_title
+    @page_title = "Add a new Xbox360 gamertag"
   end
 end
