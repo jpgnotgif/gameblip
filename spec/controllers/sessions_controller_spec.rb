@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SessionsController do
-  integrate_views
-
   before :each do
     @user = users(:josephpgutierrez)
     @controller.instance_eval { flash.extend(DisableFlashSweeping) } 
