@@ -10,7 +10,7 @@ describe XboxConsoleUser do
 
   it "should save" do
     lambda {
-      Net::HTTP.should_receive(:get).once.with(URI.parse(@url + @xbox_console_user.gamertag)).and_return(@xml)
+      Net::HTTP.expects(:get).once.with(URI.parse(@url + @xbox_console_user.gamertag)).returns(@xml)
       @xbox_console_user.save.should be_true
       violated "#{@xbox_console_user.errors.full_messages.to_sentence}" if @xbox_console_user.new_record?
       @user.xbox_console_users.count.should == 1
