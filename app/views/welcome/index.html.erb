@@ -1,10 +1,22 @@
 <div id="inline">
-Ever wanted to know what other gamers are up to? Now you can.
+  Ever wanted to know what other gamers are up to? Now you can.
 
-<div class="xbox_avatars">
-  <%= image_tag "xbox360/jpgnotgif.jpg" %>
-  <%= image_tag "xbox360/ijengar.jpg" %>
-  <%= image_tag "xbox360/eosjack.jpg" %>
-  <%= link_to "Find any Xbox360 gamertag", xbox_console_users_path %>
-</div>
+  <div class="xbox_avatars">
+    <%= image_tag "xbox360/jpgnotgif.jpg" %>
+    <%= image_tag "xbox360/ijengar.jpg" %>
+    <%= image_tag "xbox360/eosjack.jpg" %>
+    <%= link_to "Find any Xbox360 gamertag", xbox_console_users_path, {:class => "text"} %>
+  </div>
+
+  <div class="psn_avatars">
+    <%= image_tag "psn/GeekAtHome.jpg" %>
+    <%= image_tag "psn/Ascalon.jpg" %>
+    <%= image_tag "psn/ACE_GMR.jpg" %>
+    <%= link_to "Find any PSN ID", root_path, {:class => "text"} %>
+  </div>
+
+  <p><%= link_to "Share your gaming activity with the world", root_path, {:class => "text"} %></p>
+
+  
+  <div id="register"><%= link_to(image_tag("create_an_account_button.jpg"), signup_path) %></div>
 </div>

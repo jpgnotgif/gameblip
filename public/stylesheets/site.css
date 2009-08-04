@@ -19,15 +19,30 @@
 }
 
 #inline p {
-  font-size: 16px;
+  padding-left: 140px;
+  padding-top: 80px;
+  font-size: 24px;
 }
 
 .xbox_avatars {
-  padding-top: 100px;
+  padding-top: 140px;
   padding-left: 200px;
 }
 
-body { background-color: #fff; color: #333; }
+.psn_avatars {
+  padding-top: 100px;
+  padding-left: 500px;
+}
+
+#register {
+  position: absolute;
+  top: 200px;
+  left: 500px;
+}
+
+
+
+body { background-color: #fff; color: #000; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -41,8 +56,9 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; text-decoration: none; }
-a:visited { color: #666; }
+a { color: #FFF; text-decoration: none; }
+a.text { color: #000; text-decoration: none; }
+a:visited { color: #000; }
 a:hover { color: #fff; background-color:#000; }
 
 .fieldWithErrors {
