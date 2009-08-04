@@ -6,15 +6,13 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>GameBlip: <%= @page_title %></title>
   <%= link_to "Logout", logout_path if logged_in? -%>
-  <%= stylesheet_link_tag "scaffold" %>
+  <%= stylesheet_link_tag "site" %>
 </head>
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: red"><%= flash[:error] %></p>
-
-<%= yield  %>
-
+  <%= render :partial => "shared/top_nav" %>
+  <p style="color: green"><%= flash[:notice] %></p>
+  <p style="color: red"><%= flash[:error] %></p>  
+  <%= yield  %>
 </body>
 </html>
 
