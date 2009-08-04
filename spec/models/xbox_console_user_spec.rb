@@ -28,7 +28,7 @@ describe XboxConsoleUser do
 
   it "requires valid user id" do
     lambda {
-      Net::HTTP.should_receive(:get).once.with(URI.parse(@url + @xbox_console_user.gamertag)).and_return(@xml)
+      Net::HTTP.expects(:get).once.with(URI.parse(@url + @xbox_console_user.gamertag)).returns(@xml)
       @xbox_console_user.user_id = nil
       @xbox_console_user.save.should be_false
       @xbox_console_user.errors.on(:user_id).should_not be_nil
