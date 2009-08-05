@@ -1,4 +1,7 @@
 module AuthenticatedSystem
+  # @date:  08.04.2009
+  # @note:  This may be the wrong way to include the authenticate_with_http_basic method.
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
   protected
     # Returns true or false if the user is logged in.
     # Preloads @current_user with the user model if they're logged in.
