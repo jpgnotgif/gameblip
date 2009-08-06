@@ -1,4 +1,12 @@
 <div class="top">
-    <div id="user_nav"> <%= link_to "Sign in", login_path, {:class => "text"} %> </div> <%= link_to(image_tag("alpha_logo.jpg"), root_path ) %>
+    <div id="user_nav"> 
+      <% if logged_in? -%>
+        <%= link_to("Logout", logout_path, {:class => "text"}) %>
+        <%= link_to("Dashboard", user_path(current_user), {:class => "text"}) %>
+      <% else -%>
+        <%= link_to("Sign in", login_path, {:class => "text"}) %>
+      <% end -%>
+    </div> 
+    <%= link_to(image_tag("alpha_logo.jpg"), root_path ) %>
 </div>
 

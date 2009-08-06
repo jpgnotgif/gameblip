@@ -7,7 +7,7 @@
 <% @xbox_console_users.each do |xbox_console_user| %>
   <tr>
     <td><%= link_to(image_tag(xbox_console_user.avatar_url), xbox_console_user) %> </td>
-    <td><%= link_to(xbox_console_user.gamertag, xbox_console_user) %> </td>
+    <td><b><%= link_to(xbox_console_user.gamertag, xbox_console_user, {:class => "text"}) %> </b></td>
   </tr>
 <% end %>
 </table>

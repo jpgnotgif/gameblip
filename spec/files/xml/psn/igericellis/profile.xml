@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xml>
+<info name="GetInfosByPsnId Script" sourced="" description="GET Information by PSN-ID" version="0.1.002" state="stable" update="2009-07-06 00:20 GMT+1" licence="GPLv3.0" owner="Geekathome" />
+<body>
+<user psnid="igEricEllis"/>
+<category id="profile"><item id="US" userid="1366829" link="http://boardsus.playstation.com/t5/user/viewprofilepage/user-id/1366829" regdate="07-08-2004 06:18 PM" imgurl="/playstation/i/psn/16383_thumb_psn_logo_small.jpg" onlinestate="Offline" ranking="Insomniac Developer" /></category>
+</body>
+</xml>

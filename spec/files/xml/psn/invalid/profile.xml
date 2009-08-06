@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xml>
+<info name="GetInfosByPsnId Script" sourced="" description="GET Information by PSN-ID" version="0.1.002" state="stable" update="2009-07-06 00:20 GMT+1" licence="GPLv3.0" owner="Geekathome" />
+<body>
+<user psnid="invalid"/>
+<category id="profile"></category>
+</body>
+</xml>

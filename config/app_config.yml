@@ -1,2 +1,12 @@
 xbox_api:
   url: "http://xboxapi.duncanmackenzie.net/gamertag.ashx?GamerTag="
+
+psn_api:
+  url: "http://api.geekweb.org/psn/getinfos/stable/out.php?psnid="
+  profile: "&cat=profile"
+  widget: "&cat=widget"
+  trophy: "&cat=trophy"
+  country: "&cat=country"
+
+giant_bomb_api:
+  key: "bd114e0dba79a95c6dae0c43aae2d4cb75742913"

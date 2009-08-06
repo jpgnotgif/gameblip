@@ -29,11 +29,32 @@ describe XboxConsoleUsersController do
     login_as @user
     lambda {
       lambda {
-        create_xbox_console_user
+        params = {
+          :xbox_console_user => {
+            :gamertag => @xbox_console_user.gamertag
+          }   
+        }
+        create_xbox_console_user(params)
         assigns(:xbox_console_user).should be_instance_of(XboxConsoleUser)
         flash[:notice].should == "Xbox360 account was successfully added"
       }.should change(@user.xbox_console_users, :count).by(1)
     }.should change(XboxConsoleUser, :count).by(1)
+  end
+
+  it "should not create xbox console user" do
+    login_as @user
+    lambda {
+      lambda {
+        params = {
+          :xbox_console_user => {
+            :gamertag => nil
+          }   
+        }
+        create_xbox_console_user(params)
+        assigns(:xbox_console_user).should be_instance_of(XboxConsoleUser)
+        response.should render_template(:new)
+      }.should_not change(@user.xbox_console_users, :count).by(1)
+    }.should_not change(XboxConsoleUser, :count).by(1)
   end
 
   it "should show xbox console user" do
@@ -47,9 +68,8 @@ describe XboxConsoleUsersController do
   end
 
   protected
-  def create_xbox_console_user(options = {})
-    params = { :xbox_console_user => {} }
+  def create_xbox_console_user(params)
     Net::HTTP.stubs(:get).with(URI.parse(AppConfig.xbox_api.url + @xbox_console_user.gamertag)).returns(@xml)
-    post :create, :xbox_console_user => {:gamertag => @xbox_console_user.gamertag}.merge(options)
+    post :create, params
   end
 end

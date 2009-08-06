@@ -16,6 +16,7 @@ class XboxConsoleUser < ActiveRecord::Base
 
   private
   def valid_identity?
+    return false if self.errors.any?
     valid_account_statuses = ["gold", "silver"]
     begin
       self.api_result = HashExtras.symbolize_all_keys!(Hash.from_xml(Net::HTTP.get(URI.parse(AppConfig.xbox_api.url + self.gamertag))))

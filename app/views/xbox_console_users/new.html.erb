@@ -2,11 +2,10 @@
 
 <%= error_messages_for :xbox_console_user, :header_message => "We couldn't add the gamertag", :message => "There were problems" %>
 
-<% form_for(@xbox_console_user) do |f| %>
-  <p>Gamertag: <%= f.text_field :gamertag %> </p>
-  <p>
-    <%= f.submit 'Add' %>
-  </p>
+<% form_tag xbox_console_users_path do %>
+  <p>Gamertag: <%= text_field :xbox_console_user, :gamertag %> </p>
+
+  <p> <%= image_submit_tag("add_button.jpg") %> <%= link_to(image_tag("back_button.jpg"), user_path(current_user)) %></p>
 <% end %>
 
-<%= link_to 'Back', xbox_console_users_path %>
+
