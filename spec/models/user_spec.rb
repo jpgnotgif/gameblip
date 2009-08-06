@@ -8,10 +8,13 @@ describe User do
         @user = create_user
         violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
       end
+      @emails = ActionMailer::Base.deliveries
+      @emails.clear
     end
 
     it 'increments User#count' do
       @creating_user.should change(User, :count).by(1)
+      @emails.size.should == 1
     end
   end
 
