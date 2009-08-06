@@ -1,5 +1,11 @@
 app/controllers/*.swp
 app/models/*.swp
+spec/*.swp
+spec/models/*.swp
+spec/controllers/*.swp
+spec/fixtures/*.swp
+spec/helpers/*.swp
 db/schema.rb
+config/*.swp
 tmp/*
 log/*

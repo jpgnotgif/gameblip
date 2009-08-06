@@ -10,7 +10,7 @@ Factory.define(:user) do |f|
 end
 
 Factory.define(:xbox_console_user) do |f|    
-  data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live/jpgnotgif.xml"), "r") { |file| file.read }))
+  data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live/jpgnotgif.xml"), "r") { |file| file.read }))
   f.gamertag data[:xbox_info][:gamertag]
   f.account_status data[:xbox_info][:account_status]
   f.status data[:xbox_info][:presence_info][:status_text]
@@ -22,4 +22,17 @@ Factory.define(:xbox_console_user) do |f|
   f.zone data[:xbox_info][:zone]
   f.last_seen_at Time.parse(data[:xbox_info][:presence_info][:last_seen])
   f.online data[:xbox_info][:presence_info][:online]
+end
+
+Factory.define(:playstation_console_user) do |f|
+  data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "spec/files/xml/psn/geek_at_home/profile.xml"), "r") { |file| file.read}))
+  f.psn_id data[:xml][:body][:user][:psnid]
+  f.rank data[:xml][:body][:category][:item].first["ranking"]
+  f.avatar_url data[:xml][:body][:category][:item].first["imgurl"]
+  
+  month, day, year = data[:xml][:body][:category][:item].first["regdate"].split.first.split("-")
+  time, day_period = data[:xml][:body][:category][:item].first["regdate"].split[1], data[:xml][:body][:category][:item].first["regdate"].split.last
+  f.registered_at Time.parse("#{year}-#{month}-#{day} #{time}#{day_period}") 
+  f.online data[:xml][:body][:category][:item].last["onlinestate"].downcase == "online"
+  f.country "US" 
 end

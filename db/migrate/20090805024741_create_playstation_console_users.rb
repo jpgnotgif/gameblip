@@ -2,7 +2,7 @@ class CreatePlaystationConsoleUsers < ActiveRecord::Migration
   def self.up
     create_table :playstation_console_users do |t|
       t.references :user
-      t.string :name
+      t.string :psn_id
       t.string :rank
       t.string :avatar_url
       t.datetime :registered_at
