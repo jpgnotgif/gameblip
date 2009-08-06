@@ -11,7 +11,7 @@ describe PlaystationConsoleUser do
 
   it "should save" do
     lambda {
-      Net:HTTP.expects(:get).with(URI.parse(@url + @playstation_console_user.psn_id + @profile)).returns(@xml)
+      Net::HTTP.expects(:get).with(URI.parse(@url + @playstation_console_user.psn_id + @profile)).returns(@xml)
       @playstation_console_user.save.should be_true
       violated "#{@playstation_console_user.errors.full_messages.to_sentence}" if @playstation_console_user.new_record?
       @user.playstation_console_users.count.should == 1
@@ -30,7 +30,7 @@ describe PlaystationConsoleUser do
     @playstation_console_user.user_id = nil
     lambda {
       @playstation_console_user.save.should be_false
-      @playstation_console_user.errors.on(:user).should be_true
+      @playstation_console_user.errors.on(:user_id).should be_true
       @user.playstation_console_users.count.should == 0
     }.should_not change(PlaystationConsoleUser, :count).by(1)
   end

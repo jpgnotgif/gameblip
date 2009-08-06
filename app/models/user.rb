@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   has_many :xbox_console_users
+  has_many :playstation_console_users
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
