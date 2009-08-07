@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../spec_helper'
 
-class PlaystationConsoleUsersHelperTest < ActionView::TestCase
+describe PlaystationConsoleUsersHelper do
 end
