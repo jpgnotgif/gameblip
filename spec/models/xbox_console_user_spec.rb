@@ -4,7 +4,7 @@ describe XboxConsoleUser do
   before :each do
     @user = users(:josephpgutierrez)
     @xbox_console_user = Factory.build(:xbox_console_user, {:user => @user})
-    @xml = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "foo.xml"), "r") { |f| f.read }
+    @xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live", "foo.xml"), "r") { |f| f.read }
     @url = AppConfig.instance_variable_get(:@config).xbox_api.url
   end
 

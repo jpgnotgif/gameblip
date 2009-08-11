@@ -4,7 +4,8 @@ describe XboxConsoleUsersController do
   before do
     @user               = users(:josephpgutierrez)
     @xbox_console_user  = Factory.build(:xbox_console_user, {:user => @user})
-    @xml                = File.open(File.join(RAILS_ROOT, "test/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
+    @xml                = File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
+    @controller.instance_eval { flash.extend(DisableFlashSweeping) }
   end 
 
   it "should get index page" do
@@ -36,7 +37,8 @@ describe XboxConsoleUsersController do
         }
         create_xbox_console_user(params)
         assigns(:xbox_console_user).should be_instance_of(XboxConsoleUser)
-        flash[:notice].should == "Xbox360 account was successfully added"
+        response.should redirect_to(xbox_console_user_path(assigns(:xbox_console_user).id))
+        flash.now[:notice].should == "Xbox360 account was successfully added"
       }.should change(@user.xbox_console_users, :count).by(1)
     }.should change(XboxConsoleUser, :count).by(1)
   end

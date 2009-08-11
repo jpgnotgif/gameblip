@@ -7,6 +7,7 @@ describe PlaystationConsoleUsersController do
     @url = AppConfig.instance_variable_get(:@config).psn_api.url
     @profile = AppConfig.instance_variable_get(:@config).psn_api.profile
     @profile_xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/psn/geek_at_home/profile.xml")) { |f| f.read }
+    @controller.instance_eval { flash.extend(DisableFlashSweeping) }
   end
 
   it "should get index page" do
@@ -61,7 +62,8 @@ describe PlaystationConsoleUsersController do
       create_playstation_console_user(params)
       @user.playstation_console_users.count.should == 1
       flash.now[:notice].should == "Successfully added PSN ID"
-      response.should redirect_to(playstation_console_user_path(@playstation_console_user.id))
+      assigns(:playstation_console_user).should be_instance_of(PlaystationConsoleUser) 
+      response.should redirect_to(playstation_console_user_path(assigns(:playstation_console_user).id))
     }.should change(PlaystationConsoleUser, :count).by(1)
   end
 
