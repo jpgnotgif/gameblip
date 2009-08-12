@@ -5,7 +5,7 @@
 
 <p><b>Currently Online? </b> <%= @xbox_console_user.online ? "Yes" : "No" %> </p>
 <p><b>Last Time Online: </b> <%= pretty_time(@xbox_console_user.last_seen_at) %> </p>
-<p><b>Owned by: </b> <%= link_to(@xbox_console_user.user.login, user_path(@xbox_console_user.user.id)) %> </p>
+<p><b>Owned by: </b> <%= link_to(@xbox_console_user.user.login, user_path(@xbox_console_user.user.id), {:class => "text"}) %> </p>
 <p><b>Membership Status: </b> <%= @xbox_console_user.account_status %> </p>
 <p><b>Gamerscore: </b> <%= @xbox_console_user.gamerscore %> </p>
 <p><b>Gamerzone: </b> <%= @xbox_console_user.zone %> </p>

@@ -4,7 +4,7 @@ class PlaystationConsoleUsersController < ApplicationController
 
   def index
     @page_title = "PSN IDs"
-    @playstation_console_users = PlaystationConsoleUser.all
+    @playstation_console_users = PlaystationConsoleUser.paginate(:page => params[:page], :order => "created_at DESC")
     respond_to do |format|
       format.html
       format.xml { render :xml => @playstation_console_users }

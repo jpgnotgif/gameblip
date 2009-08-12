@@ -8,6 +8,10 @@ describe XboxConsoleUsersController do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
   end 
 
+  it "should map 'xbox360/avatars' as {:controller => :xbox_console_users, :action => :index}" do
+    route_for(:controller => "xbox_console_users", :action => "index").should == "/xbox360/avatars"
+  end
+
   it "should get index page" do
     get :index
     response.should render_template(:index)

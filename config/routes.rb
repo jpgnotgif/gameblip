@@ -1,14 +1,18 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :playstation_console_users
-
   map.root :controller => 'welcome'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
-  map.resources :users
-  map.resources :xbox_console_users
+
+  map.resources :xbox_console_users, :as => 'xbox360/avatars'
+  map.resources :playstation_console_users, :as => 'ps3/avatars'
+
+  map.resources :users do |user|
+    user.resources :xbox_console_users, :as => 'xbox360/avatars'
+    user.resources :playstation_console_users, :as => "ps3/avatars"
+  end
 
   map.resource :session
 

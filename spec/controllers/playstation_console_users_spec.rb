@@ -10,6 +10,10 @@ describe PlaystationConsoleUsersController do
     @controller.instance_eval { flash.extend(DisableFlashSweeping) }
   end
 
+  it "should map 'ps3/avatars to {:controller => 'playstation_console_users', :action => 'index'}'" do
+    route_for(:controller => "playstation_console_users", :action => "index").should == "ps3/avatars"
+  end
+
   it "should get index page" do
     get :index
     assigns(:playstation_console_users).should_not be_nil
