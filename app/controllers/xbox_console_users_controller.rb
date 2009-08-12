@@ -4,7 +4,7 @@ class XboxConsoleUsersController < ApplicationController
 
   def index
     @page_title = "Xbox360 gamertags"
-    @xbox_console_users = XboxConsoleUser.all
+    @xbox_console_users = XboxConsoleUser.paginate(:page => params[:page], :order => "created_at DESC")
     respond_to do |format|
       format.html 
       format.xml  { render :xml => @xbox_console_users }

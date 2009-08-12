@@ -1,1 +1,12 @@
-Fill me in!
+<h1> PSN IDS </h1>
+
+<table>
+  <tr></tr>
+  <% @playstation_console_users.each do |playstation_console_user| -%>
+    <tr>
+      <td><%= link_to(image_tag(playstation_console_user.avatar_url), playstation_console_user) %></td>
+      <td><b><%= link_to(playstation_console_user.psn_id, playstation_console_user, {:class => "text"})%></b></td>
+    </tr>
+  <% end -%>
+
+</table>

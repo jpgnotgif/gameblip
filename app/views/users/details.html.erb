@@ -10,13 +10,6 @@
 <br />
 <br />
 
-<h3>Gamertags</h3>
-<table>
-  <tr>
-  <% @xbox_console_users.each do |xbox_console_user| %>
-      <td><%= link_to(image_tag(xbox_console_user.avatar_url), xbox_console_user_path(xbox_console_user.id)) %><p><%= xbox_console_user.gamertag %></p></td>
-  <% end %>
-  </tr>
-</table>
-<%= link_to(image_tag("add_a_new_gamertag_button.jpg"), new_xbox_console_user_path) if logged_in? %>
+<h3><%= link_to("Xbox360 Gamertags", my_xbox360_avatars_path(:id => @user.id), {:class => "text"}) %></h3>
+<h3><%= link_to("PSN ids", my_ps3_avatars_path(:id => @user.id), {:class => "text"}) %></h3>
 

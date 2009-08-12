@@ -1,5 +1,6 @@
 app/controllers/*.swp
 app/models/*.swp
+app/views/*/*.swp
 spec/*.swp
 spec/models/*.swp
 spec/controllers/*.swp

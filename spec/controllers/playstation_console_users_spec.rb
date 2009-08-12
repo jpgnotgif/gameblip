@@ -14,6 +14,10 @@ describe PlaystationConsoleUsersController do
     route_for(:controller => "playstation_console_users", :action => "index").should == "ps3/avatars"
   end
 
+  it "should map 'ps3/avatars/mine' to {:controller => 'playstation_console_users', :action => 'mine', :id => :id}" do
+    route_for(:controller => "playstation_console_users", :action => "mine", :id => "#{@user.id}").should == "/ps3/avatars/mine/#{@user.id}"
+  end
+
   it "should get index page" do
     get :index
     assigns(:playstation_console_users).should_not be_nil
