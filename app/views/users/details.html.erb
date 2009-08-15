@@ -10,6 +10,5 @@
 <br />
 <br />
 
-<h3><%= link_to("Xbox360 Gamertags", my_xbox360_avatars_path(:id => @user.id), {:class => "text"}) %></h3>
-<h3><%= link_to("PSN ids", my_ps3_avatars_path(:id => @user.id), {:class => "text"}) %></h3>
+<h3><%= link_to("Xbox360 Gamertags", show_my_xbox360_avatars_path(:login => @user.login), {:class => "text"}) %></h3>
 

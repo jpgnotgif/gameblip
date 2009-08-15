@@ -1,5 +1,5 @@
 <h1> Gameblip users: <%= User.count %> </h1>
 
 <% @users.each do |u| -%>
-  <p><%= link_to u.login, user_path(u) %></p>
+  <p><%= link_to u.login, user_path(u), {:class => "text"} %></p>
 <% end -%>

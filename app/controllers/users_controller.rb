@@ -45,12 +45,12 @@ class UsersController < ApplicationController
 
   def show
     @page_title = "Viewing all users"
-    @users = User.all.paginate
     if @user
       @page_title = "Viewing #{@user.login}'s details"
       @xbox_console_users = @user.xbox_console_users
       render :template => "users/details"
     else
+      @users = User.paginate(:page => params[:page])
       render :action => :show
     end
   end

@@ -12,8 +12,8 @@ describe XboxConsoleUsersController do
     route_for(:controller => "xbox_console_users", :action => "index").should == "/xbox360/avatars"
   end
 
-  it "should map 'xbox360/avatars/mine' as {:controller => :xbox_console_users, :action => :mine, :id => :id}" do
-    route_for(:controller => "xbox_console_users", :action => "mine", :id => "#{@user.id}").should == "/xbox360/avatars/mine/#{@user.id}"
+  it "should map 'xbox360/avatars/list/:login' as {:controller => :xbox_console_users, :action => :list, :login => :user_login}" do
+    route_for(:controller => "xbox_console_users", :action => "list", :login => "#{@user.login}").should == "/xbox360/avatars/list/#{@user.login}"
   end
 
   it "should get index page" do
@@ -75,6 +75,27 @@ describe XboxConsoleUsersController do
     }
     get :show, params
     response.should render_template(:show) 
+  end
+
+  it "should show list page" do
+    params = {
+      :login => @user.login
+    }
+    get :list, params
+    assigns(:user).should == @user
+    assigns(:xbox_console_users).should_not be_nil
+    response.should render_template("list")
+  end
+
+  it "should require valid login for list page" do
+    params = {
+      :login => "invalid_login"
+    }
+    get :list, params
+    assigns(:user).should be_nil
+    assigns(:xbox_console_users).should be_nil
+    response.should redirect_to(users_path)
+    flash.now[:error].should == "Invalid user id"
   end
 
   protected

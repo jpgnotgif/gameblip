@@ -6,18 +6,12 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
 
-  map.my_xbox360_avatars '/xbox360/avatars/mine/:id', :controller => 'xbox_console_users', :action => 'mine'
-  map.my_ps3_avatars '/ps3/avatars/mine/:id', :controller => 'playstation_console_users', :action => 'mine'
+  map.show_my_xbox360_avatars '/xbox360/avatars/list/:login', :controller => 'xbox_console_users', :action => 'list', :login => /\w+/
 
   map.resource :session
-
+  map.resources :users
   map.resources :xbox_console_users, :as => 'xbox360/avatars'
   map.resources :playstation_console_users, :as => 'ps3/avatars'
-
-  map.resources :users do |user|
-    user.resources :xbox_console_users, :as => 'xbox360/avatars'
-    user.resources :playstation_console_users, :as => "ps3/avatars"
-  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

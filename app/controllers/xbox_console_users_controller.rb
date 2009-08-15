@@ -46,6 +46,16 @@ class XboxConsoleUsersController < ApplicationController
     end
   end
 
+  def list
+    @user = User.find_by_login(params[:login])
+    if @user
+      @xbox_console_users = @user.xbox_console_users
+    else
+      redirect_to users_path
+      flash.now[:error] = "Invalid user id"
+    end
+  end
+
   protected
   def load_page_title
     @page_title = "Add a new Xbox360 gamertag"
