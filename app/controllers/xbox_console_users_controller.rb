@@ -49,6 +49,7 @@ class XboxConsoleUsersController < ApplicationController
   def list
     @user = User.find_by_login(params[:login])
     if @user
+      @page_title = "#{@user.login}'s Xbox360 avatars"
       @xbox_console_users = @user.xbox_console_users
     else
       redirect_to users_path

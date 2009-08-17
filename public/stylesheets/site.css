@@ -40,6 +40,17 @@
   left: 500px;
 }
 
+#activities_section {
+  position: absolute;
+  top: 200px;
+  left: 875px;
+}
+
+#avatar_data {
+  position: absolute;
+  top: 200px;
+}
+
 h2 { font-size: 32px; }
 h3 { font-size: 24px; }
 

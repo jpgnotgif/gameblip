@@ -1,18 +1,29 @@
 <h1>Viewing details for <%= @xbox_console_user.gamertag %> </h1>
 
 
-<p><%= image_tag @xbox_console_user.avatar_url %></p>
+<div id="activities_section">
+  <b><%= @xbox_console_user.gamertag %></b>
+  <p><%= image_tag @xbox_console_user.avatar_url %>  </p>
+  <% form_tag activities_path do -%>
+    <%= image_submit_tag "add_button.jpg" %>
+    <%= text_area :activity, :description, {:cols => 40, :rows => 8} %>
+  <% end -%>
 
-<p><b>Currently Online? </b> <%= @xbox_console_user.online ? "Yes" : "No" %> </p>
-<p><b>Last Time Online: </b> <%= pretty_time(@xbox_console_user.last_seen_at) %> </p>
-<p><b>Owned by: </b> <%= link_to(@xbox_console_user.user.login, user_path(@xbox_console_user.user.id), {:class => "text"}) %> </p>
-<p><b>Membership Status: </b> <%= @xbox_console_user.account_status %> </p>
-<p><b>Gamerscore: </b> <%= @xbox_console_user.gamerscore %> </p>
-<p><b>Gamerzone: </b> <%= @xbox_console_user.zone %> </p>
-<p><b>Location: </b> <%= @xbox_console_user.location %> </p>
-<p><b>Country: </b> <%= @xbox_console_user.country %> </p>
-<p><b>Reputation: </b> <%= image_tag @xbox_console_user.reputation_url %> </p>
+</div>
 
-<%= link_to(image_tag("back_button.jpg"), user_path(@xbox_console_user.user.id)) %>
+
+<div id="avatar_data">
+  <p><b>Currently Online? </b> <%= @xbox_console_user.online ? "Yes" : "No" %> </p>
+  <p><b>Last Time Online: </b> <%= pretty_time(@xbox_console_user.last_seen_at) %> </p>
+  <p><b>Owned by: </b> <%= link_to(@xbox_console_user.user.login, user_path(@xbox_console_user.user.id), {:class => "text"}) %> </p>
+  <p><b>Membership Status: </b> <%= @xbox_console_user.account_status %> </p>
+  <p><b>Gamerscore: </b> <%= @xbox_console_user.gamerscore %> </p>
+  <p><b>Gamerzone: </b> <%= @xbox_console_user.zone %> </p>
+  <p><b>Location: </b> <%= @xbox_console_user.location %> </p>
+  <p><b>Country: </b> <%= @xbox_console_user.country %> </p>
+  <p><b>Reputation: </b> <%= image_tag @xbox_console_user.reputation_url %> </p>
+</div>
+
+
 
 

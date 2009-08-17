@@ -82,6 +82,7 @@ describe XboxConsoleUsersController do
       :login => @user.login
     }
     get :list, params
+    assigns(:page_title).should == "#{@user.login}'s Xbox360 avatars"
     assigns(:user).should == @user
     assigns(:xbox_console_users).should_not be_nil
     response.should render_template("list")
@@ -92,6 +93,7 @@ describe XboxConsoleUsersController do
       :login => "invalid_login"
     }
     get :list, params
+    assigns(:page_title).should be_nil
     assigns(:user).should be_nil
     assigns(:xbox_console_users).should be_nil
     response.should redirect_to(users_path)
