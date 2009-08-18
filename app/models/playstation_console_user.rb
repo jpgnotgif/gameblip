@@ -1,5 +1,6 @@
 class PlaystationConsoleUser < ActiveRecord::Base
   attr_accessor :profile_api_result
+  has_many :activities, :as => :avatar
   belongs_to :user
   validates_presence_of :psn_id
   validates_presence_of :user_id, :message => "must be associated with a PSN ID"

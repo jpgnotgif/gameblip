@@ -8,6 +8,7 @@
 class XboxConsoleUser < ActiveRecord::Base
   attr_accessor :api_result
   belongs_to :user
+  has_many :activities, :as => :avatar
   validates_presence_of :gamertag
   validates_presence_of :user_id, :message => "must be associated with an Xbox360 gamertag"
   validate_on_create :valid_identity?
