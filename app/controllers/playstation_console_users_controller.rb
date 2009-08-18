@@ -38,6 +38,11 @@ class PlaystationConsoleUsersController < ApplicationController
     unless @playstation_console_user
       redirect_to playstation_console_users_path
       flash.now[:error] = "Invalid PSN user id"
+      return false
+    end
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @playstation_console_user}
     end
   end
 
