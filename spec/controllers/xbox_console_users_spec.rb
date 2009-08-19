@@ -74,7 +74,9 @@ describe XboxConsoleUsersController do
       :id => XboxConsoleUser.first.id
     }
     get :show, params
-    response.should render_template(:show) 
+    assigns(:xbox_console_user).should(be_instance_of(XboxConsoleUser))
+    assigns(:activities).should_not be_nil
+    response.should render_template(:show)
   end
 
   it "should show list page" do

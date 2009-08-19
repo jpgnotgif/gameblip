@@ -18,7 +18,10 @@ class XboxConsoleUsersController < ApplicationController
         format.html { render :action => :index }
         format.xml  { render :xml => {:errors => ["Xbox360 user id is invalid"]}, :status => :unprocessable_entity }
       else
-        format.html { @page_title = "Viewing details for #{@xbox_console_user.gamertag}" } 
+        format.html { 
+          @page_title = "Viewing details for #{@xbox_console_user.gamertag}" 
+          @activities = @xbox_console_user.activities.recent.paginate(:page => 1, :order => "created_at DESC", :per_page => 4)
+        } 
         format.xml  { render :xml => @xbox_console_user }
       end
     end

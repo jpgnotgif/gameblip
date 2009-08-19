@@ -4,13 +4,12 @@
 <div id="activities_section">
   <b><%= @xbox_console_user.gamertag %></b>
   <p><%= image_tag @xbox_console_user.avatar_url %>  </p>
-  <% form_tag activities_path do -%>
-    <%= image_submit_tag "add_button.jpg" %>
-    <%= text_area :activity, :description, {:cols => 40, :rows => 8} %>
-    <%= hidden_field_tag "activity[avatar_id]", @xbox_console_user.id %>
-    <%= hidden_field_tag "activity[avatar_type]", @xbox_console_user.class.name %>
-  <% end -%>
 
+  <%= render :partial => "activity_form" %>
+
+  <% @activities.each do |activity| -%>
+    <%= activity.created_at.strftime("%B %d, %Y @ %I:%M%p") %><%= activity.description %>
+  <% end -%>
 </div>
 
 

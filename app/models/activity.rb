@@ -9,7 +9,9 @@ class Activity < ActiveRecord::Base
   named_scope :recent, lambda { |*args| {:conditions => ["created_at >= ?", args.first || 4.days.ago] } } 
 
   private
-  # Acceptables avatar types include XboxConsoleUser and PlaystationConsoleUser. 
+  # Acceptables avatar types include XboxConsoleUser and
+  # PlaystationConsoleUser. Possible errors include invalid
+  # avatar type or id, or if no avatar was found.
   def valid_avatar?
     begin
       if eval(self.avatar_type)
