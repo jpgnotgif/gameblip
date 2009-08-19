@@ -117,30 +117,27 @@ describe UsersHelper do
     end
   end
 
-#  describe "link_to_current_user, When logged out" do
-#    before do
-#      stub!(:current_user).and_return(nil)
-#    end
-#    it "should link to the login_path" do
-#      link_to_current_user().should have_tag("a[href='/login']")
-#    end
-#    it "should use given link text if :content_text is specified" do
-#      link_to_current_user(:content_text => 'Hello there!').should have_tag("a", 'Hello there!')
-#    end
-#    it "should use 'not signed in' as link text with no :content_method specified" do
-#      link_to_current_user().should have_tag("a", 'not signed in')
-#    end
-#    it "should use the ip address as title" do
-#      link_to_current_user().should have_tag("a[title='0.0.0.0']")
-#    end
-#    it "should by default be like school in summer and have no class" do
-#      link_to_current_user().should_not have_tag("a.nickname")
-#    end
-#    it "should have some class if you tell it to" do
-#      result = link_to_current_user(:class => 'foo bar')
-#      result.should have_tag("a.foo")
-#      result.should have_tag("a.bar")
-#    end
-#  end
+  describe "link_to_current_user, When logged out" do
+    it "should link to the login_path" do
+      link_to_current_user().should have_tag("a[href='/login']")
+    end
+    it "should use given link text if :content_text is specified" do
+      link_to_current_user(:content_text => 'Hello there!').should have_tag("a", 'Hello there!')
+    end
+    it "should use 'not signed in' as link text with no :content_method specified" do
+      link_to_current_user().should have_tag("a", 'not signed in')
+    end
+    it "should use the ip address as title" do
+      link_to_current_user().should have_tag("a[title='0.0.0.0']")
+    end
+    it "should by default be like school in summer and have no class" do
+      link_to_current_user().should_not have_tag("a.nickname")
+    end
+    it "should have some class if you tell it to" do
+      result = link_to_current_user(:class => 'foo bar')
+      result.should have_tag("a.foo")
+      result.should have_tag("a.bar")
+    end
+  end
 
 end
