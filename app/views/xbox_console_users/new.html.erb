@@ -5,7 +5,7 @@
 <% form_tag xbox_console_users_path do %>
   <p>Gamertag: <%= text_field :xbox_console_user, :gamertag %> </p>
 
-  <p> <%= image_submit_tag("add_button.jpg") %> <%= link_to(image_tag("back_button.jpg"), user_path(current_user)) %></p>
+  <p> <%= image_submit_tag("add_button.jpg") %> <%= link_to("Back", user_path(current_user), {:class => "text"}) %></p>
 <% end %>
 
 

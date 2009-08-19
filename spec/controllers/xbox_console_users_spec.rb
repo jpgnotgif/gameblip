@@ -79,6 +79,17 @@ describe XboxConsoleUsersController do
     response.should render_template(:show)
   end
 
+  it "should require valid id on show page" do
+    params = {
+      :id => "invalid_id"
+    }
+    get :show, params
+    assigns(:xbox_console_user).should be_nil
+    assigns(:activities).should be_nil
+    response.should redirect_to(xbox_console_users_path)
+    flash[:error].should == "Invalid xbox360 gamertag"
+  end
+
   it "should show list page" do
     params = {
       :login => @user.login

@@ -1,6 +1,7 @@
+<%= error_messages_for :activity, :header_message => nil, :message => nil %> 
 <% form_tag activities_path do -%>
-  <%= image_submit_tag "add_button.jpg" %>
   <%= text_area :activity, :description, {:cols => 40, :rows => 8} %>
   <%= hidden_field_tag "activity[avatar_id]", @xbox_console_user.id %>
   <%= hidden_field_tag "activity[avatar_type]", @xbox_console_user.class.name %>
+  <%= image_submit_tag "add_button.jpg" %>
 <% end -%>

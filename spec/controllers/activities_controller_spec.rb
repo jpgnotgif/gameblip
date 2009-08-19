@@ -30,7 +30,20 @@ describe ActivitiesController do
       post :create, params
       assigns(:activity).should_not be_nil
       response.should redirect_to(xbox_console_user_path(@xbox_console_user.id))
+      flash[:notice].should == "Thanks for updating your status!"
     }.should change(Activity, :count).by(1)
+  end
+
+  it "should not create activity with invalid description" do
+    login_as @user
+    avatar = eval(@activity_attributes[:avatar_type]).find_by_id(@activity_attributes[:avatar_id])
+    params = {
+      :activity => @activity_attributes.merge(:description => "")
+    }
+    post :create, params
+    response.should redirect_to(eval("#{avatar.class.name.underscore}_path(#{avatar.id})"))
+    flash[:notice].should be_nil
+    flash[:error].should == "Invalid activity description"
   end
 
   it "should require authentication on create" do

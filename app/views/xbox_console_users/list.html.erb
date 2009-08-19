@@ -1,3 +1,4 @@
 <% @xbox_console_users.each do |u| -%>
   <%= link_to(image_tag(u.avatar_url), xbox_console_user_path(u.id))%> <%= u.gamertag %> <br />
 <% end -%>
+<%= link_to(image_tag("add_a_new_gamertag_button.jpg"), new_xbox_console_user_path) %>

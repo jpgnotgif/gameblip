@@ -29,11 +29,16 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(params[:activity])
     respond_to do |format|
       if @activity.save
-        flash[:notice] = 'Activity was successfully created.'
-        format.html { redirect_to(@activity.avatar) }
+        format.html { 
+          redirect_to(@activity.avatar) 
+          flash[:notice] = "Thanks for updating your status!"
+        }
         format.xml  { render :xml => @activity, :status => :created, :location => @activity }
       else
-        format.html { render :action => "new" }
+        format.html {
+          redirect_to(@activity.avatar)
+          flash[:error] = "Invalid activity description"
+        }
         format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
       end
     end

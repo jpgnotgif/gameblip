@@ -15,12 +15,15 @@ class XboxConsoleUsersController < ApplicationController
     @xbox_console_user = XboxConsoleUser.find_by_id(params[:id])
     respond_to do |format|
       unless @xbox_console_user
-        format.html { render :action => :index }
+        format.html { 
+          redirect_to(xbox_console_users_path)
+          flash[:error] = "Invalid xbox360 gamertag"
+        }
         format.xml  { render :xml => {:errors => ["Xbox360 user id is invalid"]}, :status => :unprocessable_entity }
       else
         format.html { 
           @page_title = "Viewing details for #{@xbox_console_user.gamertag}" 
-          @activities = @xbox_console_user.activities.recent.paginate(:page => 1, :order => "created_at DESC", :per_page => 4)
+          @activities = @xbox_console_user.activities.recent.paginate(:page => params[:page], :order => "created_at DESC")
         } 
         format.xml  { render :xml => @xbox_console_user }
       end
