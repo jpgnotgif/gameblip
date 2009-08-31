@@ -20,7 +20,7 @@ class XboxConsoleUser < ActiveRecord::Base
     return false if self.errors.any?
     valid_account_statuses = ["gold", "silver"]
     begin
-      self.api_result = HashExtras.symbolize_all_keys!(Hash.from_xml(Net::HTTP.get(URI.parse(AppConfig.xbox_api.url + self.gamertag))))
+      self.api_result = HashExtras.underscorize_and_symbolize_all_keys!(Hash.from_xml(Net::HTTP.get(URI.parse(AppConfig.xbox_api.url + self.gamertag))))
       logger.info(self.api_result[:xbox_info].inspect)
       unless valid_account_statuses.include?(self.api_result[:xbox_info][:account_status].downcase)
         self.errors.add(:gamertag, "was not found, Please try again.")

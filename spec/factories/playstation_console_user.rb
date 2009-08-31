@@ -1,5 +1,5 @@
  Factory.define(:playstation_console_user) do |f|
-   data = HashExtras.symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "spec/files/xml/psn/geek_at_home/profile.xml"), "r") { |file| file.    read}))
+   data = HashExtras.underscorize_and_symbolize_all_keys!(Hash.from_xml(File.open(File.join(RAILS_ROOT, "spec/files/xml/psn/geek_at_home/profile.xml"), "r") { |file| file.    read}))
    f.psn_id data[:xml][:body][:user][:psnid]
    f.rank data[:xml][:body][:category][:item].first["ranking"]
    f.avatar_url data[:xml][:body][:category][:item].first["imgurl"]

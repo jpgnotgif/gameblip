@@ -1,13 +1,16 @@
-# @author:  josephpgutierrez
-# @date:    07.14.2009
-# @note:    This module contains methods used to manipulate hashes. The ideal
-# implementation would be to extend the hash module through activesupport
-# and add both a destructive and non-destructive method to this module.
-
 module HashExtras
-  def self.symbolize_all_keys!(hash)
-    return hash if hash.empty? || !hash.is_a?(Hash)
-    hash.symbolize_keys!
-    hash.each { |k, v| symbolize_all_keys!(v) if v.is_a?(Hash) }
+  def self.underscorize_and_symbolize_all_keys!(hash)
+    return hash unless is_valid_hash?(hash)
+    hash.each do |k,v|
+      underscorize_and_symbolize_all_keys!(v) if is_valid_hash?(v)
+      hash.delete(k)
+      hash[k.to_s.underscore.to_sym] = v
+    end 
+    return hash
+  end
+
+  def self.is_valid_hash?(hash)
+    return false if hash.nil? || !hash.is_a?(Hash) || hash.empty?
+    return true
   end
 end

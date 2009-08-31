@@ -4,15 +4,14 @@ describe XboxConsoleUser do
   before :each do
     @user = users(:josephpgutierrez)
     @xbox_console_user = Factory.build(:xbox_console_user, {:user => @user})
-    @xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live", "foo.xml"), "r") { |f| f.read }
+    @xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
     @url = AppConfig.instance_variable_get(:@config).xbox_api.url
   end
 
   it "should save" do
     lambda {
       Net::HTTP.expects(:get).once.with(URI.parse(@url + @xbox_console_user.gamertag)).returns(@xml)
-      @xbox_console_user.save.should be_true
-      violated "#{@xbox_console_user.errors.full_messages.to_sentence}" if @xbox_console_user.new_record?
+      violated "#{@xbox_console_user.errors.full_messages.to_sentence}" unless @xbox_console_user.save
       @user.xbox_console_users.count.should == 1
     }.should change(XboxConsoleUser, :count).by(1)
   end
