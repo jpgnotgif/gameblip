@@ -2,6 +2,7 @@ app/controllers/*.swp
 app/models/*.swp
 app/views/*/*.swp
 app/helpers/*.swp
+lib/*.swp
 spec/*.swp
 spec/models/*.swp
 spec/controllers/*.swp
