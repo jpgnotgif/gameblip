@@ -19,27 +19,48 @@ describe HashExtras do
         "BoosterGold" => "golden",
         "JusticeLeague" => {
           "Superman" => "Man of Steel",
-          "Batman" => "Dark Knight",
-          "MartianManhunter" => {
-            "MarsMan" => true,
-            "SuperHero" => true
+          "Batman" => {
+            "DarkKnight" => true,
+            "BruceWayne" => true,
           }
         }
       }
     }
   end
 
-  # TODO: Replace with custom rspec matchers
   it "should convert single level hash keys" do
     converted_hash = HashExtras.underscorize_and_symbolize_all_keys!(@single_level_hash)
-    converted_hash.keys.include?(:batman_and_robin).should be_true
-    converted_hash.keys.include?("BatmanAndRobin").should be_false
-    converted_hash.keys.include?(:spam_and_eggs).should be_true
-    converted_hash.keys.include?("SpamAndEggs").should be_false
+
+    converted_hash.should have_key(:batman_and_robin)
+    converted_hash.should_not have_key("BatmanAndRobin")
+
+    converted_hash.should have_key(:spam_and_eggs)
+    converted_hash.should_not have_key("SpamAndEggs")
   end
 
   it "should convert multi level hash keys" do
     converted_hash = HashExtras.underscorize_and_symbolize_all_keys!(@multilevel_hash)
-    converted_hash.keys.include?()
+
+    converted_hash.should have_key(:dc_villains)
+    converted_hash.should_not have_key("DCVillains")
+    converted_hash.should have_key(:dc_heroes)
+    converted_hash.should_not have_key("DCHeroes")
+
+    dc_villains_hash = converted_hash[:dc_villains]    
+    dc_villains_hash.should have_key(:the_joker)
+    dc_villains_hash.should_not have_key("TheJoker")
+    dc_villains_hash.should have_key(:mr_freeze)
+    dc_villains_hash.should_not have_key("MrFreeze")
+
+    the_joker_hash = dc_villains_hash[:the_joker]
+    the_joker_hash.should have_key(:harley_quinn)
+    the_joker_hash.should have_key(:the_clown_prince_of_crime)
+    
+    dc_heroes_hash = converted_hash[:dc_heroes]
+    dc_heroes_hash.should have_key(:justice_league)
+    dc_heroes_hash.should_not have_key("JusticeLeague")
+
+    # TODO: Continue here
+
   end
 end
