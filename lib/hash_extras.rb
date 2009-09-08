@@ -1,4 +1,6 @@
 module HashExtras
+  # This method does not work if you have a different iterable type. It will
+  # only work on single and multilevel hashes.
   def self.underscorize_and_symbolize_all_keys!(hash)
     return hash unless is_valid_hash?(hash)
     hash.each do |k,v|

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :xbox_console_users
   has_many :playstation_console_users
 
+  
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
   validates_uniqueness_of   :login
@@ -27,7 +28,6 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation
-
 
   # Activates the user in the database.
   def activate!

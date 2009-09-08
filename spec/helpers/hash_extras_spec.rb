@@ -16,7 +16,6 @@ describe HashExtras do
         "MrFreeze" => "cold_blooded"
       },
       "DCHeroes" => {
-        "BoosterGold" => "golden",
         "JusticeLeague" => {
           "Superman" => "Man of Steel",
           "Batman" => {
@@ -59,8 +58,16 @@ describe HashExtras do
     dc_heroes_hash = converted_hash[:dc_heroes]
     dc_heroes_hash.should have_key(:justice_league)
     dc_heroes_hash.should_not have_key("JusticeLeague")
+    
+    justice_league_hash = dc_heroes_hash[:justice_league]
 
-    # TODO: Continue here
+    justice_league_hash.should have_key(:batman)
+    justice_league_hash.should_not have_key("Batman")
 
+    batman_hash = justice_league_hash[:batman]
+    batman_hash.should have_key(:dark_knight)
+    batman_hash.should_not have_key("DarkKnight")
+    batman_hash.should have_key(:bruce_wayne)
+    batman_hash.should_not have_key("BruceWayne")    
   end
 end
