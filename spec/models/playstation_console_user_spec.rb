@@ -13,7 +13,6 @@ describe PlaystationConsoleUser do
     lambda {
       Net::HTTP.expects(:get).with(URI.parse(@url + @playstation_console_user.psn_id + @profile)).returns(@xml)
       @playstation_console_user.save.should be_true
-      violated "#{@playstation_console_user.errors.full_messages.to_sentence}" if @playstation_console_user.new_record?
       @user.playstation_console_users.count.should == 1
     }.should change(PlaystationConsoleUser, :count).by(1)
   end

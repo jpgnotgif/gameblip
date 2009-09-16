@@ -3,7 +3,6 @@
   <p><%= link_to(image_tag(@xbox_console_user.avatar_url), @xbox_console_user) %>  </p>
   <%= render :partial => "activity_form" %>
   <%= render :partial => "activity", :collection => @activities %>
-  <%= will_paginate @activities, {:class => "text"} %>
 </div>
 
 <div id="avatar_data"><%= render :partial => @xbox_console_user %></div>

@@ -12,7 +12,7 @@ class PlaystationConsoleUser < ActiveRecord::Base
   def valid_identity?
     return false if self.errors.any?
     begin
-      self.profile_api_result = HashExtras.symbolize_all_keys!(Hash.from_xml(Net::HTTP.get(URI.parse(AppConfig.psn_api.url + self.psn_id + AppConfig.psn_api.profile))))
+      self.profile_api_result = HashExtras.underscorize_and_symbolize_all_keys!(Hash.from_xml(Net::HTTP.get(URI.parse(AppConfig.psn_api.url + self.psn_id + AppConfig.psn_api.profile))))
       unless self.profile_api_result[:xml][:body][:category][:item]
         self.errors.add(:psn_id, "was not found. Please ensure that the id is correct")
         return false
