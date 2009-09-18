@@ -1,0 +1,14 @@
+xbox360_recreation:
+  name: recreation
+
+xbox360_family:
+  name: family
+
+xbox360_pro:
+  name: pro
+
+xbox360_underground:
+  name: underground
+
+ps3_custom:
+  name: no prisoners

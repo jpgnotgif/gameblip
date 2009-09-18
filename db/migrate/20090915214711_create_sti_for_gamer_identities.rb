@@ -8,6 +8,14 @@ class CreateStiForGamerIdentities < ActiveRecord::Migration
       t.string :avatar_url
       t.boolean :online
       t.string :country
+      t.datetime :last_online_at
+      t.timestamps
+
+      # Fields specific to xbox360 users
+      t.integer :gamerscore
+      t.string :motto
+      t.float :reputation
+      t.string :account_status
     end
     drop_table :xbox_console_users
     drop_table :playstation_console_users

@@ -8,6 +8,7 @@ spec/models/*.swp
 spec/controllers/*.swp
 spec/fixtures/*.swp
 spec/helpers/*.swp
+spec/factories/*.swp
 db/schema.rb
 config/*.swp
 tmp/*

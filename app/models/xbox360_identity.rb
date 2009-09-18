@@ -5,7 +5,7 @@
 #           etc...XboxConsoleUser#valid_identity? performs the API request that
 #           verifies a given gamertag provided by a user.
 
-class XboxConsoleUser < ActiveRecord::Base
+class Xbox360Identity < GamerIdentity
   attr_accessor :api_result
   belongs_to :user
   has_many :activities, :as => :avatar
