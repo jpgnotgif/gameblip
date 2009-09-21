@@ -30,7 +30,7 @@ Spec::Runner.configure do |config|
   # do so right here. Just uncomment the next line and replace the fixture
   # names with your fixtures.
   #
-  config.global_fixtures = :users, :sessions, :activities, :gamer_identities, :categories
+  config.global_fixtures = :users, :activities, :gamer_identities, :categories
   #
   # If you declare global fixtures, be aware that they will be declared
   # for all of your examples, even those that don't use them.

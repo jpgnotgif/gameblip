@@ -4,5 +4,4 @@ Factory.define :xbox_identity do |f|
   f.account_status hash_data[:xbox_info][:account_status]
   f.gamerscore hash_data[:xbox_info][:gamer_score]
   f.reputation hash_data[:xbox_info][:reputation]
-  f.motto "Do work!"
 end

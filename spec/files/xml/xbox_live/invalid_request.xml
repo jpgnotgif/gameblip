@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<XboxInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AccountStatus>Unknown</AccountStatus>
+  <PresenceInfo>
+    <Valid>false</Valid>
+    <LastSeen>0001-01-01T00:00:00</LastSeen>
+    <Online>false</Online>
+  </PresenceInfo>
+  <State>Invalid</State>
+  <Gamertag>??????</Gamertag>
+  <Reputation>0</Reputation>
+  <GamerScore>0</GamerScore>
+  <RecentGames />
+</XboxInfo>

@@ -21,13 +21,6 @@ describe GamerIdentity do
     GamerIdentity.should have(:no).records
   end
 
-  it "should require valid associated category" do
-    @gamer_identity.category_id = nil
-    @gamer_identity.save.should be_false
-    @gamer_identity.should have(1).error_on(:category_id)
-    GamerIdentity.should have(:no).records
-  end
-
   it "should require valid type" do
     @gamer_identity.type = nil
     @gamer_identity.save.should be_false
@@ -47,6 +40,14 @@ describe GamerIdentity do
     @gamer_identity.save.should be_false
     @gamer_identity.should have(1).error_on(:avatar_url)
     GamerIdentity.should have(:no).records
+  end
+
+  it "should respond to invoke_api" do
+    @gamer_identity.should respond_to(:invoke_api)
+  end
+
+  it "should respond to build_attributes" do
+    @gamer_identity.should respond_to(:build_attributes)
   end
 
 end
