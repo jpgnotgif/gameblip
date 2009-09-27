@@ -3,6 +3,9 @@
 <info name="GetInfosByPsnId Script" sourced="" description="GET Information by PSN-ID" version="0.1.002" state="stable" update="2009-07-06 00:20 GMT+1" licence="GPLv3.0" owner="Geekathome"/>
 <body>
 <user psnid="Geekathome"/>
-<category id="profile"><item id="US" userid="1957683" link="http://boardsus.playstation.com/t5/user/viewprofilepage/user-id/1957683" regdate="02-20-2009 07:47 AM" imgurl="http://assets.np.us.playstation.com/avatar/WWS_A/A0030.png?w=60" onlinestate="Offline" ranking="Junior"/><item id="EU" userid="283152" link="http://community.eu.playstation.com/playstationeu/profile?user.id=283152" regdate="02-12-2008 03:19 AM" imgurl="http://wasi.li/wasi/ps3/img/mariotux.png" onlinestate="Online" ranking="Member"/></category>
+<category id="profile">
+  <item id="US" userid="1957683" link="http://boardsus.playstation.com/t5/user/viewprofilepage/user-id/1957683" regdate="02-20-2009 07:47 AM" imgurl="http://assets.np.us.playstation.com/avatar/WWS_A/A0030.png?w=60" onlinestate="Offline" ranking="Junior"/>
+  <item id="EU" userid="283152" link="http://community.eu.playstation.com/playstationeu/profile?user.id=283152" regdate="02-12-2008 03:19 AM" imgurl="http://wasi.li/wasi/ps3/img/mariotux.png" onlinestate="Online" ranking="Member"/>
+</category>
 </body>
 </xml>

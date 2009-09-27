@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xml>
+<info name="GetInfosByPsnId Script" sourced="" description="GET Information by PSN-ID" version="0.1.003" state="stable" update="2009-08-25 05:33 GMT+1" licence="GPLv3" owner="Geekweb API PSN Community" codes="http://api.geekweb.org/psn/getinfos/stable/code.php" />
+<body>
+<user psnid="123"/>
+<category id="profile"></category><category id="widget"></category><category id="trophy"></category><category id="country"></category>
+</body>
+</xml>

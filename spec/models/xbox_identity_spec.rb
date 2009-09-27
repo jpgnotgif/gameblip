@@ -34,4 +34,11 @@ describe XboxIdentity do
     @xbox_identity.errors.full_messages.should include("An error in the system occurred. Please try again later.")
   end
 
+  it "should not send invoke_api() because of errors" do
+    @xbox_identity.errors.add_to_base("An error has occurred")
+    Net::HTTP.expects(:get).at_least_once.with(URI.parse(@url + @xbox_identity.name)).returns(@xml)
+    @xbox_identity.save.should be_false
+    @xbox_identity.api_result.should be_nil 
+  end
+
 end

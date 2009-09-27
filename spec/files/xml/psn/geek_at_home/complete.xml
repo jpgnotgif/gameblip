@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xml>
+<info name="GetInfosByPsnId Script" sourced="" description="GET Information by PSN-ID" version="0.1.003" state="stable" update="2009-08-25 05:33 GMT+1" licence="GPLv3" owner="Geekweb API PSN Community" codes="http://api.geekweb.org/psn/getinfos/stable/code.php" />
+<body>
+<user psnid="Geekathome"/>
+<category id="profile">
+  <item id="US" userid="1957683" link="http://boardsus.playstation.com/t5/user/viewprofilepage/user-id/1957683" regdate="02-20-2009 07:47 AM" imgurl="http://assets.np.us.playstation.com/avatar/WWS_A/A0030.png?w=60" onlinestate="Offline" ranking="Junior" />
+  <item id="EU" userid="283152" link="http://community.eu.playstation.com/playstationeu/profile?user.id=283152" regdate="02-12-2008 03:19 AM" imgurl="http://wasi.li/wasi/ps3/img/mariotux.png" onlinestate="Offline" ranking="Member" />
+</category>
+<category id="widget">
+  <item id="EU" img="http://mypsn.eu.playstation.com/psn/profile/Geekathome.png" /></category>
+<category id="trophy">
+  <item id="EU" platinum="3" gold="23" silver="54" bronze="226" total="306" level="7" percent="81" />
+</category>
+<category id="country">
+  <item id="EU" hash="" />
+</category>
+</body>
+</xml>
