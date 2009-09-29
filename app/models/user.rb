@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  def xbox_identities
+    return self.identities.all(:conditions => {:type => "XboxIdentity"})
+  end
+
+  def playstation_identities
+    return self.identities.all(:conditions => {:type => "PlaystationIdentity"})
+  end
+
   protected
   def make_activation_code
     self.activation_code = self.class.make_token

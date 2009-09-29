@@ -1,4 +1,4 @@
-module XboxConsoleUsersHelper
+module XboxIdentitiesHelper
   def pretty_time(time)
     return time.strftime("%I:%M%p - %A, %B %d, %Y")
   end

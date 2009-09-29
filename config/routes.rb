@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :activities
 
-
   map.root :controller => 'welcome'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
@@ -9,17 +8,17 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
 
-  map.show_my_xbox360_avatars '/xbox360/avatars/list/:login', :controller => 'xbox_console_users', :action => 'list', :login => /\w+/
-  map.show_my_ps3_avatars '/ps3/avatars/list/:login', :controller => 'playstation_console_users', :action => 'list', :login => /\w+/
+  map.show_my_xbox360_avatars '/xbox360/avatars/list/:login', :controller => 'xbox_identities', :action => 'list', :login => /\w+/
+  map.show_my_ps3_avatars '/ps3/avatars/list/:login', :controller => 'playstation_identities', :action => 'list', :login => /\w+/
 
   map.resource :session
   map.resources :users
-  map.resources :xbox_console_users, :as => 'xbox360/avatars' do |xbox_console_user|
-    xbox_console_user.resources :activities
+  map.resources :xbox_identities, :as => 'xbox360/avatars' do |xbox_identity|
+    xbox_identity.resources :activities
   end
 
-  map.resources :playstation_console_users, :as => 'ps3/avatars' do |playstation_console_user|
-    playstation_console_user.resources :activities
+  map.resources :playstation_identities, :as => 'ps3/avatars' do |playstation_identity|
+    playstation_identity.resources :activities
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

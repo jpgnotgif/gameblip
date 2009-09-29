@@ -4,8 +4,7 @@ describe GamerIdentity do
   before :each do
     @user = users(:josephpgutierrez)
     @category = categories(:xbox360_underground)
-    @xbox_identity_attributes = Factory.attributes_for(:xbox_identity).merge(:user_id => @user.id, :category_id => @category.id)
-    @gamer_identity = Factory.build(:gamer_identity, @xbox_identity_attributes)
+    @gamer_identity = Factory.build(:gamer_identity, {:user => @user})
     @gamer_identity["type"] = XboxIdentity.name
   end
 
@@ -32,13 +31,6 @@ describe GamerIdentity do
     @gamer_identity.name = nil
     @gamer_identity.save.should be_false
     @gamer_identity.should have(1).error_on(:name)
-    GamerIdentity.should have(:no).records
-  end
-
-  it "should require valid avatar url" do
-    @gamer_identity.avatar_url = nil
-    @gamer_identity.save.should be_false
-    @gamer_identity.should have(1).error_on(:avatar_url)
     GamerIdentity.should have(:no).records
   end
 

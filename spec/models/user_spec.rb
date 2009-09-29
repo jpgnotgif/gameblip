@@ -1,6 +1,20 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
+  describe "with identities" do
+    it "should fetch xbox identities" do
+      user = setup_user_with_xbox_identity
+      user.should respond_to(:xbox_identities)
+      user.xbox_identities.count.should == 1
+    end
+
+    it "should fetch playstation identities" do
+      user = setup_user_with_playstation_identity
+      user.should respond_to(:playstation_identities)
+      user.playstation_identities.count.should == 1
+    end
+  end
+
   describe 'being created' do
     before do
       @user = nil
@@ -18,10 +32,7 @@ describe User do
     end
   end
 
-  #
   # Validations
-  #
-
   it 'requires login' do
     lambda do
       u = create_user(:login => nil)
@@ -220,4 +231,25 @@ protected
     record.save
     record
   end
+
+  def setup_user_with_xbox_identity
+    valid_xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/xbox_live", "jpgnotgif.xml"), "r") { |f| f.read }
+    url = AppConfig.instance_variable_get(:@config).xbox_api.url
+    gamer_identity_attributes = Factory.attributes_for(:gamer_identity)
+
+    Net::HTTP.expects(:get).at_least_once.returns(valid_xml)
+    xbox_identity = Factory.create(:xbox_identity, gamer_identity_attributes)
+    return xbox_identity.user
+  end
+
+  def setup_user_with_playstation_identity
+    valid_xml = File.open(File.join(RAILS_ROOT, "spec/files/xml/psn/geek_at_home/complete.xml"), "r") { |file| file.read }
+    url = AppConfig.instance_variable_get(:@config).psn_api.url
+    Net::HTTP.expects(:get).returns(valid_xml)
+  
+    gamer_identity_attributes = Factory.attributes_for(:gamer_identity)
+    playstation_identity = Factory.create(:playstation_identity, gamer_identity_attributes)
+    return playstation_identity.user
+  end
+
 end
